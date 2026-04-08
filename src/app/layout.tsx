@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     url: "/",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: ogImageAlt,
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     description: "Your close, without the chaos.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/og.png",
         width: 1200,
         height: 630,
         alt: ogImageAlt,
