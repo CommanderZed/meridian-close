@@ -9,12 +9,13 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-/** Canonical production host when not running on Vercel (no VERCEL_URL). */
+/** Stable URL for the production deployment (not the per-build VERCEL_URL hostname). */
 const PRIMARY_VERCEL_ORIGIN = "https://meridian-close.vercel.app";
 
 function siteOrigin(): string {
   const custom = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   if (custom) return custom;
+  if (process.env.VERCEL_ENV === "production") return PRIMARY_VERCEL_ORIGIN;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   if (process.env.NODE_ENV === "production") return PRIMARY_VERCEL_ORIGIN;
   return "http://localhost:3000";
