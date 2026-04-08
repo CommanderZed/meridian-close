@@ -9,9 +9,6 @@ const plusJakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const ogImageAlt =
-  "Meridian Close: continuous close without the chaos";
-
 /** Canonical production host when not running on Vercel (no VERCEL_URL). */
 const PRIMARY_VERCEL_ORIGIN = "https://meridian-close.vercel.app";
 
@@ -33,28 +30,11 @@ export const metadata: Metadata = {
     description: "Your close, without the chaos.",
     type: "website",
     url: "/",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: ogImageAlt,
-        type: "image/png",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Meridian Close",
     description: "Your close, without the chaos.",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: ogImageAlt,
-      },
-    ],
   },
 };
 

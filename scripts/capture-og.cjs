@@ -1,5 +1,9 @@
 /**
- * Captures the landing page viewport (1200×630) and writes public/og.png.
+ * Captures the landing page viewport (1200×630) and writes Next.js metadata files:
+ *   src/app/opengraph-image.png
+ *   src/app/twitter-image.png
+ * (Names are fixed by the App Router file convention.)
+ *
  * Run: npm run capture-og
  * Optional: OG_CAPTURE_URL=http://localhost:3000 npm run capture-og
  */
@@ -9,11 +13,13 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
-const out = path.join(root, "public", "og.png");
+const appDir = path.join(root, "src", "app");
+const ogOut = path.join(appDir, "opengraph-image.png");
+const twOut = path.join(appDir, "twitter-image.png");
 const url =
   process.env.OG_CAPTURE_URL || "https://meridian-close.vercel.app";
 
-fs.mkdirSync(path.join(root, "public"), { recursive: true });
+fs.mkdirSync(appDir, { recursive: true });
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
@@ -26,11 +32,13 @@ fs.mkdirSync(path.join(root, "public"), { recursive: true });
     await page.locator("h1").first().waitFor({ state: "visible", timeout: 30000 });
     await new Promise((r) => setTimeout(r, 3000));
     await page.screenshot({
-      path: out,
+      path: ogOut,
       type: "png",
       animations: "disabled",
     });
-    console.log("Wrote", out);
+    fs.copyFileSync(ogOut, twOut);
+    console.log("Wrote", ogOut);
+    console.log("Wrote", twOut);
   } finally {
     await browser.close();
   }
